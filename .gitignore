@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+ticketdesk.db
+test-results/
+reports/
+.pytest_cache/
+.ruff_cache/
+.env
