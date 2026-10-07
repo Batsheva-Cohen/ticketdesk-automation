@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}TicketDesk{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/tickets">TicketDesk</a>
+    {% if user %}
+    <nav aria-label="Main">
+      <a href="/tickets">Tickets</a>
+      <a href="/tickets/new" data-testid="nav-new-ticket">New ticket</a>
+      <a href="/widgets" data-testid="nav-widgets">Widgets</a>
+      <span class="user-badge" data-testid="current-user">{{ user.username }} ({{ user.role }})</span>
+      <a href="/logout" data-testid="nav-logout">Logout</a>
+    </nav>
+    {% endif %}
+  </header>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+  <div id="toast" class="toast hidden" role="status" data-testid="toast"></div>
+  <script src="/static/app.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

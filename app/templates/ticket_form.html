@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}New ticket - TicketDesk{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>New ticket</h1>
+  <ul id="form-errors" class="alert error hidden" data-testid="form-errors"></ul>
+  <form id="ticket-form" novalidate>
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" maxlength="80" placeholder="Short summary of the problem">
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="5" placeholder="Steps to reproduce, expected vs actual"></textarea>
+    <label for="priority">Priority</label>
+    <select id="priority" name="priority">
+      <option value="low">Low</option>
+      <option value="medium" selected>Medium</option>
+      <option value="high">High</option>
+      <option value="critical">Critical</option>
+    </select>
+    <div class="row">
+      <button type="submit" class="btn primary" id="submit-ticket">Create ticket</button>
+      <a class="btn ghost" href="/tickets">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/ticket_form.js"></script>
+{% endblock %}

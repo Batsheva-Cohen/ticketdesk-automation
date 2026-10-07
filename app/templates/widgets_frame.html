@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="frame-body">
+  <form id="feedback-form" onsubmit="return false;">
+    <label for="fb-name">Your name</label>
+    <input id="fb-name" type="text">
+    <label for="fb-message">Message</label>
+    <textarea id="fb-message" rows="2"></textarea>
+    <button type="submit" class="btn primary" id="fb-submit">Send feedback</button>
+  </form>
+  <p id="fb-result" data-testid="fb-result"></p>
+  <script>
+    document.getElementById("feedback-form").addEventListener("submit", () => {
+      const name = document.getElementById("fb-name").value.trim() || "anonymous";
+      document.getElementById("fb-result").textContent = `Thanks, ${name}! Your feedback was recorded.`;
+    });
+  </script>
+</body>
+</html>

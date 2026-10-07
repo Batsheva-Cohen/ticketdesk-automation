@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}#{{ ticket.id }} {{ ticket.title }} - TicketDesk{% endblock %}
+{% block content %}
+<section class="card" data-ticket-id="{{ ticket.id }}">
+  <div class="row between">
+    <h1 data-testid="ticket-title">#{{ ticket.id }} {{ ticket.title }}</h1>
+    {% if user.role == "admin" %}
+    <button type="button" class="btn danger" id="delete-ticket" data-testid="delete-ticket">Delete</button>
+    {% endif %}
+  </div>
+  <div class="meta">
+    <span class="badge priority-{{ ticket.priority }}" data-testid="ticket-priority">{{ ticket.priority }}</span>
+    <span class="badge status-{{ ticket.status }}" data-testid="ticket-status">{{ ticket.status }}</span>
+    <span class="muted">Reported by {{ ticket.reporter.username }}</span>
+    <span class="muted" data-testid="ticket-assignee">Assignee: {{ ticket.assignee.username if ticket.assignee else "Unassigned" }}</span>
+  </div>
+  <p class="description" data-testid="ticket-description">{{ ticket.description }}</p>
+
+  {% if user.role in ["admin", "agent"] %}
+  <div class="row workflow">
+    <label for="status-select">Change status</label>
+    <select id="status-select" data-testid="status-select">
+      <option value="open">open</option>
+      <option value="in_progress">in_progress</option>
+      <option value="resolved">resolved</option>
+      <option value="closed">closed</option>
+    </select>
+    <button type="button" class="btn" id="update-status">Update status</button>
+    <label for="assignee-select">Assignee</label>
+    <select id="assignee-select" data-testid="assignee-select">
+      {% for agent in agents %}
+      <option value="{{ agent.id }}" {% if ticket.assignee_id == agent.id %}selected{% endif %}>{{ agent.username }}</option>
+      {% endfor %}
+    </select>
+    <button type="button" class="btn" id="update-assignee">Assign</button>
+  </div>
+  {% endif %}
+  <div id="workflow-error" class="alert error hidden" role="alert" data-testid="workflow-error"></div>
+
+  <h2>Comments (<span id="comments-count" data-testid="comments-count">{{ ticket.comments | length }}</span>)</h2>
+  <ul id="comments" class="comments">
+    {% for comment in ticket.comments %}
+    <li class="comment" data-testid="comment">
+      <strong>{{ comment.author.username }}</strong>
+      <span class="muted">{{ comment.created_at.strftime("%Y-%m-%d %H:%M") }}</span>
+      <p>{{ comment.body }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  <form id="comment-form" novalidate>
+    <label for="comment-body">Add a comment</label>
+    <textarea id="comment-body" rows="3" placeholder="Write a comment..."></textarea>
+    <button type="submit" class="btn primary" id="submit-comment">Add comment</button>
+  </form>
+</section>
+
+<dialog id="confirm-dialog" data-testid="confirm-dialog">
+  <h3 id="confirm-title">Confirm</h3>
+  <p id="confirm-message"></p>
+  <div class="row">
+    <button type="button" class="btn primary" id="confirm-yes">Confirm</button>
+    <button type="button" class="btn ghost" id="confirm-no">Cancel</button>
+  </div>
+</dialog>
+{% endblock %}
+{% block scripts %}
+<script src="/static/ticket_detail.js"></script>
+{% endblock %}

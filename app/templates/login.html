@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Sign in - TicketDesk{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>Sign in</h1>
+  {% if error %}
+  <div class="alert error" role="alert" data-testid="login-error">{{ error }}</div>
+  {% endif %}
+  <form method="post" action="/login" id="login-form">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" autocomplete="username" required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" required>
+    <button type="submit" class="btn primary">Sign in</button>
+  </form>
+</section>
+{% endblock %}

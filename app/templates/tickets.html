@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Tickets - TicketDesk{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="row between">
+    <h1>Tickets</h1>
+    <a class="btn primary" href="/tickets/new">New ticket</a>
+  </div>
+  <form id="filter-form" class="filters" onsubmit="return false;">
+    <label for="filter-status">Status</label>
+    <select id="filter-status" name="status" data-testid="filter-status">
+      <option value="">All</option>
+      <option value="open">Open</option>
+      <option value="in_progress">In progress</option>
+      <option value="resolved">Resolved</option>
+      <option value="closed">Closed</option>
+    </select>
+    <label for="filter-priority">Priority</label>
+    <select id="filter-priority" name="priority" data-testid="filter-priority">
+      <option value="">All</option>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+      <option value="critical">Critical</option>
+    </select>
+    <input id="filter-q" name="q" type="search" placeholder="Search tickets..." data-testid="filter-q">
+    <button type="button" id="apply-filters" class="btn">Apply</button>
+    <button type="button" id="clear-filters" class="btn ghost">Clear</button>
+  </form>
+  <div id="loading" class="loading" data-testid="loading">Loading tickets...</div>
+  <table id="tickets-table" class="table hidden">
+    <thead>
+      <tr>
+        <th>ID</th><th>Title</th><th>Priority</th><th>Status</th><th>Reporter</th><th>Comments</th><th>Created</th>
+      </tr>
+    </thead>
+    <tbody id="tickets-body"></tbody>
+  </table>
+  <p id="empty-state" class="muted hidden" data-testid="empty-state">No tickets match your filters.</p>
+  <div id="load-error" class="alert error hidden" role="alert" data-testid="load-error">
+    Could not load tickets. <button type="button" id="retry-load" class="btn ghost">Retry</button>
+  </div>
+  <nav class="pagination" aria-label="Pagination">
+    <button type="button" id="prev-page" class="btn ghost" aria-label="Previous page">Previous</button>
+    <span id="page-info" data-testid="page-info"></span>
+    <button type="button" id="next-page" class="btn ghost" aria-label="Next page">Next</button>
+  </nav>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/tickets.js"></script>
+{% endblock %}
