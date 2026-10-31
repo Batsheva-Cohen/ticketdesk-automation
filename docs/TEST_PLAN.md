@@ -37,16 +37,16 @@
 |  TC-TKT-014 | Tickets|create ticket with empty status returns 422 |API |Low | validation|
 |  TC-TKT-015 | Tickets|create ticket with invalid priority string returns 422 |API |medium | validation|
 |  TC-TKT-016 | Workflow|transition ticket status from open to in_progress (valid)|API |high | State Machine|
-|  TC-TKT-017 | Workflow|transition ticket status from open to resolved (valid) |API |high | State Machine|
-|  TC-TKT-018 | Workflow|transition ticket status from open to closed (valid) |API |high | State Machine|
+|  TC-TKT-017 | Workflow|transition ticket status from open to resolved (invalid)returns 409 |API |high | State Machine|
+|  TC-TKT-018 | Workflow|transition ticket status from open to closed (invalid)returns 409 |API |high | State Machine|
 |  TC-TKT-019 | Workflow|ctransition ticket status from in_progress to resolved (valid) |API |high | State Machine|
 |  TC-TKT-020 | Workflow|ctransition ticket status from resolved to closed (valid) |API |high | State Machine|
 |  TC-TKT-021 | Workflow|transition ticket status from closed to open (invalid) |API |medium | State Machine|
 |  TC-TKT-022 | Workflow|transition ticket status from closed to in_progress (invalid) |API |medium | State Machine|
 |  TC-TKT-023 | Workflow|transition ticket status from closed to resolved (invalid) |API |medium | State Machine|
-|  TC-TKT-024 | Workflow|transition ticket status from resolved to open (invalid)|API |medium | State Machine|
+|  TC-TKT-024 | Workflow|transition ticket status from resolved to open (valid)|API |medium | State Machine|
 |  TC-TKT-025 | Workflow|transition ticket status from resolved to in_progress (invalid) |API |medium | State Machine|
-|  TC-TKT-026 | Workflow|transition ticket status from in_progress to open (invalid) |API |medium | State Machine|
+|  TC-TKT-026 | Workflow|transition ticket status from in_progress to open (valid) |API |medium | State Machine|
 |  TC-TKT-027 | Workflow|transition ticket status from in_progress to closed (invalid) |API |high | State Machine|
 |  TC-TKT-028 |Permissions|reporter attempts to delete ticket returns 403 |API |high | rulse|
 |  TC-TKT-029 |Permissions|reporter attempts to assign ticket returns 403 |API |high | rulse|
@@ -61,7 +61,13 @@
 |  TC-TKT-038 |UI|create ticket modal opens and validates on client side |UI |high | UI Ticket Modal|
 |  TC-TKT-039 |UI|clicking ticket row navigates smoothly to detail view |UI |medium | UI Navigation|
 |  TC-TKT-040 |UI|status badge changes color dynamically upon patch |UI |low | UI View|
+|  TC-TKT-040 |UI|status badge changes color dynamically upon patch |UI |low | UI View|
 |  TC-TKT-041 |DB|verify ticket creation directly inside SQLite database |DB |high | Databace|
+|  TC-TKT-042 |API|transition ticket status from open to open (no-op) |API |medium | 200 OK|
+|  TC-TKT-042 |API|transition ticket status from in_progress to in_progress (no-op) |API |medium | 200 OK|
+|  TC-TKT-042 |API|transition ticket status from resolved to resolved (no-op) |API |medium | 200 OK|
+|  TC-TKT-042 |API|transition ticket status from closed to closed (no-op) |API |medium | 200 OK|
+
 
 ## 5. Test data strategy
 [seed של 25 tickets, reset בתחילת ריצה, כל טסט יוצר נתונים ייחודיים ומוחק בסיום]
