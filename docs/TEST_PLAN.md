@@ -63,33 +63,6 @@
 |  TC-TKT-040 |UI|status badge changes color dynamically upon patch |UI |low | UI View|
 |  TC-TKT-041 |DB|verify ticket creation directly inside SQLite database |DB |high | Databace|
 
-
-
-
-
-
-
-
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-| ... | | | | | |
-
 ## 5. Test data strategy
 [seed של 25 tickets, reset בתחילת ריצה, כל טסט יוצר נתונים ייחודיים ומוחק בסיום]
 
