@@ -7,7 +7,9 @@
 | **שינוי סטטוס לא חוקי** | שינוי ממצב בתהליך למצב סגור| PATCH /api/tickets/29 HTTP/1.1| 409|לא השתנה כלום |
 | **הוספת comment** |Add comments-hiiii | POST /api/tickets/29/comments HTTP/1.1"| 201| נןספה הערה לכרטיס 29 |
 | **מחיקה כ-admin** | delete על משימה 27| DELETE /api/tickets/27 HTTP/1.1 | 204| משימה 27 כבר לא קיימת|
-| **מחיקה כ-reporter** | אני לא יכולה למחוק כרפורט מכיוון שלא קיים בממשק אופצייץ מחיקה 
+| **מחיקה כ-reporter** | | מחיקה כ-reporter | DELETE /api/tickets/{id} עם token של reporter | 403 | אין שינוי ב-ticket או ב-comments |
+
+
 
 **קבלת טוקן חדש עבור מנהל**
 curl.exe -X POST "http://127.0.0.1:8000/api/auth/login" -H "Content-Type: application/json" -d "{\"username\": \"admin\", \"password\": \"Admin123!\"}"

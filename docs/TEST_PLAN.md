@@ -33,7 +33,7 @@
 |  TC-TKT-010 | Tickets|create ticket with description under 10 chars returns 422 |API |Low | validation|
 |  TC-TKT-011 | Tickets|create ticket with title of 1 chars |API |Low | validation|
 |  TC-TKT-012 | Tickets|create ticket with title of 80 chars |API |Low | validation|
-|  TC-TKT-013 | Tickets|create ticket with descreption of 81 chars |API |Low | validation|
+|  TC-TKT-013 | Tickets | create ticket with title of 81 chars returns 422 | API | high | title maximum length: 80 |
 |  TC-TKT-014 | Tickets|create ticket with empty status returns 422 |API |Low | validation|
 |  TC-TKT-015 | Tickets|create ticket with invalid priority string returns 422 |API |medium | validation|
 |  TC-TKT-016 | Workflow|transition ticket status from open to in_progress (valid)|API |high | State Machine|
@@ -61,12 +61,12 @@
 |  TC-TKT-038 |UI|create ticket modal opens and validates on client side |UI |high | UI Ticket Modal|
 |  TC-TKT-039 |UI|clicking ticket row navigates smoothly to detail view |UI |medium | UI Navigation|
 |  TC-TKT-040 |UI|status badge changes color dynamically upon patch |UI |low | UI View|
-|  TC-TKT-040 |UI|status badge changes color dynamically upon patch |UI |low | UI View|
-|  TC-TKT-041 |DB|verify ticket creation directly inside SQLite database |DB |high | Databace|
-|  TC-TKT-042 |API|transition ticket status from open to open (no-op) |API |medium | 200 OK|
-|  TC-TKT-042 |API|transition ticket status from in_progress to in_progress (no-op) |API |medium | 200 OK|
-|  TC-TKT-042 |API|transition ticket status from resolved to resolved (no-op) |API |medium | 200 OK|
-|  TC-TKT-042 |API|transition ticket status from closed to closed (no-op) |API |medium | 200 OK|
+|  TC-TKT-041 |UI|status badge changes color dynamically upon patch |UI |low | UI View|
+|  TC-TKT-042 |DB|verify ticket creation directly inside SQLite database |DB |high | Databace|
+|  TC-TKT-043 |API|transition ticket status from open to open (no-op) |API |medium | 200 OK|
+|  TC-TKT-044 |API|transition ticket status from in_progress to in_progress (no-op) |API |medium | 200 OK|
+|  TC-TKT-045 |API|transition ticket status from resolved to resolved (no-op) |API |medium | 200 OK|
+|  TC-TKT-046 |API|transition ticket status from closed to closed (no-op) |API |medium | 200 OK|
 
 
 ## 5. Test data strategy
