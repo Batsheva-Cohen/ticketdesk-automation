@@ -1,3 +1,9 @@
+## BUG-001 (suspected): invalid transition from closed to open returns 200 instead of 409
+- Spec: Closed is a terminal state; transitioning from closed to open is invalid and must return 409 Conflict
+- Actual: System accepts the transition and returns 200 OK
+- Repro: Create ticket -> move through workflow to closed -> call PATCH /api/tickets/{id} with status="open" -> returns 200 OK instead of 409
+- Found by: tests/api/test_workflow.py::test_invalid_transition_returns_409[closed->open]
+
 ## BUG-002 (suspected): search ignores description
 - Spec: GET /api/tickets?q= searches title OR description
 - Actual: only title is searched
