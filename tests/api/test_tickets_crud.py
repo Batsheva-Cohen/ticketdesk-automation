@@ -179,7 +179,6 @@ def test_create_ticket_title_regular_returns_201(agent_api: ApiClient):
     response = agent_api.create_ticket(payload)
     assert response.status_code == 201
 
-@pytest.mark.xfail(reason="Bug 004: Priority sorting is alphabetical (critical, high, low, medium) instead of logical severity")
 def test_list_sort_by_priority_asc(agent_api: ApiClient):
     items = agent_api.list_tickets(sort="priority", order="asc", page_size=50).json()["items"]
     priorities = [item["priority"] for item in items]
@@ -220,12 +219,9 @@ def test_assign_ticket_to_non_existent_assignee_returns_400(agent_api: ApiClient
     assert response.status_code == 400
 
 
-def test_reporter_can_add_comment_to_admin_ticket(admin_api: ApiClient, reporter_api: ApiClient):   
-    payload = ticket_payload(title="Bug in production", description="Created by admin user")
-    ticket_response = admin_api.create_ticket(payload)
-    assert ticket_response.status_code == 201
-    
-    ticket_id = ticket_response.json()["id"]
+def test_reporter_can_add_comment_to_admin_ticket(ticket_factory, admin_api: ApiClient, reporter_api: ApiClient):   
+    ticket = ticket_factory(admin_api, title="Bug in production", description="Created by admin user")
+    ticket_id = ticket["id"]
     comment_content = "reporter_update"
     comment_response = reporter_api.add_comment(ticket_id, comment_content)
     

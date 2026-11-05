@@ -73,8 +73,8 @@ class ApiClient:
     def reset(self) -> requests.Response:
         return self._request("POST", "/api/admin/reset")
 
-    def login_as(role):
+    def login_as(self, role: str) -> requests.Response:
         username, password = USERS[role]
-        return username, password
+        return self.login(username, password)
 
     
