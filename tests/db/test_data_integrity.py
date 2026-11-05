@@ -1,6 +1,7 @@
 import pytest
 
 from clients.api_client import ApiClient
+from tests.conftest import clean_database
 from utils import db
 
 pytestmark = [pytest.mark.db]
@@ -51,8 +52,7 @@ def test_passwords_are_never_stored_in_plain_text():
         assert "$" in row["password_hash"], "expected salt$digest format"
         assert "123!" not in row["password_hash"], f"plain password leaked for {row['username']}"
 
-def test_reset_endpoint_restores_initial_data(admin_api: ApiClient):
-    admin_api.reset()
+def test_reset_endpoint_restores_initial_data(clean_database):
     num_of_tickets = db.scalar("SELECT COUNT(*) FROM tickets")
     num_of_count = db.scalar("SELECT COUNT(*) FROM users")
     assert num_of_tickets == 25
