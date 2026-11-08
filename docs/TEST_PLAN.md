@@ -54,8 +54,8 @@
 |  TC-TKT-031 |Permissions|admin accesses system user management succeeds |API |high | rulse|
 |  TC-TKT-032 |Permissions|reporter accesses system user management returns 403 |API |high | rulse|
 |  TC-TKT-033 |filter|filter tickets list by status query param |API |medium | GET /api/tickets?status=|
-|  TC-TKT-034 |filter|search tickets list by keyword in title |API |medium | GET /api/tickets?search=|
-|  TC-TKT-035 |filter|pagination limits results using limit and offset |API |medium | GET /api/tickets?limit=|
+|  TC-TKT-034 | Filter | search tickets by keyword in title | API | medium | GET /api/tickets?q= |
+|  TC-TKT-035 | Filter | paginate tickets with page and page_size | API | medium | GET /api/tickets?page=3&page_size=10 |
 |  TC-TKT-036 |UI|login page renders successfully and accepts input |UI |smoke |UI Login view |
 |  TC-TKT-037 |UI|dashboard displays ticket table and items correctly |UI |smoke |UI Dashboard |
 |  TC-TKT-038 |UI|create ticket modal opens and validates on client side |UI |high | UI Ticket Modal|
@@ -78,3 +78,7 @@ Entry: [השרת עולה, /api/health מחזיר 200]
 Exit: [כל טסטי smoke עוברים, אין failures לא מוסברים, באגים פתוחים מסומנים xfail עם קישור ל-bug report]
 
 ## 7. Environment
+- Base URL: http://127.0.0.1:8000
+- Database:./ticketdesk.db
+- Run API and DB tests: uv run pytest -m "api or db" -q
+- Required environment variables: TICKETDESK_BASE_URL, TICKETDESK_DB_PATH, TICKETDESK_AUTOSTART

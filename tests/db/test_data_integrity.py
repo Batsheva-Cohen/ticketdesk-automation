@@ -52,11 +52,15 @@ def test_passwords_are_never_stored_in_plain_text():
         assert "$" in row["password_hash"], "expected salt$digest format"
         assert "123!" not in row["password_hash"], f"plain password leaked for {row['username']}"
 
-def test_reset_endpoint_restores_initial_data(clean_database):
-    num_of_tickets = db.scalar("SELECT COUNT(*) FROM tickets")
-    num_of_count = db.scalar("SELECT COUNT(*) FROM users")
-    assert num_of_tickets == 25
-    assert num_of_count == 3
+def test_reset_endpoint_restores_initial_data(ticket_factory, admin_api: ApiClient):
+    ticket_factory(title="Ticket created before reset")
+    response = admin_api.reset()
+
+    ticket_count = db.scalar("SELECT COUNT(*) FROM tickets")
+    user_count = db.scalar("SELECT COUNT(*) FROM users")
+    assert response.status_code == 200
+    assert ticket_count == 25
+    assert user_count == 3
 
 def test_all_assigned_users_have_valid_roles():
     invalid_assignments = db.fetch_all(

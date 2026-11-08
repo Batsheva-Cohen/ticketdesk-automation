@@ -227,6 +227,5 @@ def test_reporter_can_add_comment_to_admin_ticket(ticket_factory, admin_api: Api
     
     assert comment_response.status_code == 201    
     comment_data = comment_response.json()
-    print(comment_data)
     assert comment_data["body"] == comment_content
     assert comment_data["author"]["role"] == "reporter"  #
